@@ -82,18 +82,11 @@ def can_to_can():
 
 
 def calculate():
-    number1 = amount1.get()
-    number2 = amount2.get()
-    cost1 = price1.get()
-    cost2 = price2.get()
-    percentage1 = content1.get()
-    percentage2 = content2.get()
+    pricepercan1 = price1.get() / amount1.get()
+    pricepercan2 = price2.get() / amount2.get()
 
-    pricepercan1 = cost1 / number1
-    pricepercan2 = cost2 / number2
-
-    contentpereuro1 = round(percentage1 / pricepercan1, 2)
-    contentpereuro2 = round(percentage2 / pricepercan2, 2)
+    contentpereuro1 = round(content1.get() / pricepercan1, 2)
+    contentpereuro2 = round(content2.get() / pricepercan2, 2)
 
     if contentpereuro1 > contentpereuro2:
         tm.showinfo('Result', alcohol1.get() + ' is better value than ' + alcohol2.get())
