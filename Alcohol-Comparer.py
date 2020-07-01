@@ -69,8 +69,13 @@ def calculate():
     pricepercan1 = cost1 / number1
     pricepercan2 = cost2 / number2
 
-    print(pricepercan1)
-    print(pricepercan2)
+    contentpereuro1 = round(percentage1 / pricepercan1, 2)
+    contentpereuro2 = round(percentage2 / pricepercan2, 2)
+
+    if contentpereuro1 > contentpereuro2:
+        print(alcohol1.get(), 'is better value than', alcohol2.get())
+    else:
+        print(alcohol2.get(), 'is better value than', alcohol1.get())
 
 
 
