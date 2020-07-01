@@ -4,8 +4,32 @@ import tkinter.messagebox as tm
 root = Tk()
 
 
-def entryscreen():
-    root.title('Alcohol Comparer')
+def welcomescreen():
+    root.title('Welcome!')
+    fr = Frame(root)
+
+    message = "Welcome to the alcohol comparer!\nThis program is still under construction but please" \
+              " enjoy it in it's current state.\nAny feedback is appreciated."
+    line = ['Can to Can']
+
+    Label(root, text=message).pack()
+    Label(fr, text='Please choose from the list:').grid(row=1)
+    listbox = Listbox(fr, height=2)
+    for i in line:
+        listbox.insert(END, i)
+    listbox.grid(row=1, column=1)
+
+    Button(fr, text='Quit', command=root.quit).grid(row=3)
+    Button(fr, text='Go', command=can_to_can).grid(row=3, column=1)
+
+    fr.pack()
+    fr.mainloop()
+
+
+def can_to_can():
+    t = Toplevel(root)
+    t.transient(root)
+    t.title('Alcohol Comparer')
 
     global alcohol1
     global amount1
@@ -16,8 +40,8 @@ def entryscreen():
     global price2
     global content2
 
-    fr1 = Frame(root)
-    fr2 = Frame(root)
+    fr1 = Frame(t)
+    fr2 = Frame(t)
     alcohol1 = StringVar(fr1)
     amount1 = IntVar(fr1)
     price1 = DoubleVar(fr1)
@@ -55,7 +79,6 @@ def entryscreen():
     Button(fr1, text='Calculate', command=calculate).grid(row=4, column=3)
 
     fr1.pack()
-    fr1.mainloop()
 
 
 def calculate():
@@ -73,12 +96,9 @@ def calculate():
     contentpereuro2 = round(percentage2 / pricepercan2, 2)
 
     if contentpereuro1 > contentpereuro2:
-        print(alcohol1.get(), 'is better value than', alcohol2.get())
+        tm.showinfo('Result', alcohol1.get() + ' is better value than ' + alcohol2.get())
     else:
-        print(alcohol2.get(), 'is better value than', alcohol1.get())
+        tm.showinfo('Result', alcohol2.get() + ' is better value than ' + alcohol1.get())
 
 
-
-
-
-entryscreen()
+welcomescreen()
