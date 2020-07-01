@@ -10,20 +10,23 @@ def welcomescreen():
 
     message = "Welcome to the alcohol comparer!\nThis program is still under construction but please" \
               " enjoy it in it's current state.\nAny feedback is appreciated."
-    line = ['Can to Can']
 
     Label(root, text=message).pack()
-    Label(fr, text='Please choose from the list:').grid(row=1)
-    listbox = Listbox(fr, height=2)
-    for i in line:
-        listbox.insert(END, i)
-    listbox.grid(row=1, column=1)
-
     Button(fr, text='Quit', command=root.quit).grid(row=3)
-    Button(fr, text='Go', command=can_to_can).grid(row=3, column=1)
+    Button(fr, text='Go', command=choose).grid(row=3, column=1)
 
     fr.pack()
     fr.mainloop()
+
+
+def choose():
+    t = Toplevel(root)
+    t.transient(root)
+    t.title('Please Choose a Comparison')
+
+    Button(t, text='Can - Can', command=can_to_can).pack()
+    Button(t, text='Can - Bottle').pack()
+    Button(t, text='Bottle - Bottle').pack()
 
 
 def can_to_can():
@@ -81,12 +84,16 @@ def can_to_can():
     fr1.pack()
 
 
-def calculate():
-    pricepercan1 = price1.get() / amount1.get()
-    pricepercan2 = price2.get() / amount2.get()
+def bottle_to_bottle():
+    print('hello')
 
-    contentpereuro1 = round(content1.get() / pricepercan1, 2)
-    contentpereuro2 = round(content2.get() / pricepercan2, 2)
+
+def calculate():
+    priceperunit1 = price1.get() / amount1.get()
+    priceperunit2 = price2.get() / amount2.get()
+
+    contentpereuro1 = round(content1.get() / priceperunit1, 2)
+    contentpereuro2 = round(content2.get() / priceperunit2, 2)
 
     if contentpereuro1 > contentpereuro2:
         tm.showinfo('Result', alcohol1.get() + ' is better value than ' + alcohol2.get())
